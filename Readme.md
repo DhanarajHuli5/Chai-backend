@@ -8,3 +8,5 @@
 3.  .env ->
 4.  src/ app , constants, index.js
 5.  src/ controllers/ , db/, middlewares/, models/, routes/, utils/
+
+# 7 : Connect to database in MERN
