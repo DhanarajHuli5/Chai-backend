@@ -5,7 +5,7 @@ import { ApiError } from "../utils/ApiError.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
 
 
-const generateAccessAndRefreshToken = async(userId) => {
+const generateAccessAndRefereshTokens = async(userId) => {
     try {
         const user = await User.findById(userId)
         const accessToken = user.generateAccessToken()
@@ -124,7 +124,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const isPasswordValid = await user.isPasswordCorrect(password)
 
-    if(!isPasswordVAlid) {
+    if(!isPasswordValid) {
         throw new ApiError(401, "Invalid credentials")
     }
 
