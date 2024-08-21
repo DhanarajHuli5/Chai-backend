@@ -4,6 +4,8 @@ import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { ApiError } from "../utils/ApiError.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
 import jwt from "jsonwebtoken"
+import mongoose from "mongoose";
+
 
 
 const generateAccessAndRefereshTokens = async(userId) => {
@@ -331,16 +333,16 @@ const updateUserCoverImage = asyncHandler(async(req, res) => {
 })
 
 const getUserChannelProfile = asyncHandler(async(req, res) => {
-    const {username} = req.params
+    const {userName} = req.params
 
-    if (!username?.trim()) {
+    if (!userName?.trim()) {
         throw new ApiError(400, "username is missing")
     }
 
     const channel = await User.aggregate([
         {
             $match: {
-                username: username?.toLowerCase()
+                userName: userName?.toLowerCase()
             }
         },
         {
@@ -379,7 +381,7 @@ const getUserChannelProfile = asyncHandler(async(req, res) => {
         {
             $project: {
                 fullName: 1,
-                username: 1,
+                userName: 1,
                 subscribersCount: 1,
                 channelsSubscribedToCount: 1,
                 isSubscribed: 1,
